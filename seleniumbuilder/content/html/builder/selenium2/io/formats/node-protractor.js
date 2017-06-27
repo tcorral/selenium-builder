@@ -22,7 +22,11 @@ builder.selenium2.io.addLangFormatter({
 		"setElementText": "    element(by.{locatorBy}({locator})).sendKeys({text});\n",
 		"doubleClickElement": "    element(by.{locatorBy}({locator})).click();\n" +
 			"    element(by.{locatorBy}({locator})).click();\n",
-		"mouseOverElement": "    // TODO: mouseOverElement: {locator}",
+		"mouseOverElement": "    element(by.{locatorBy}({locator}))\n" +
+												"      .getLocation()\n" +
+												"      .then(function (location) {\n" +
+												"        browser.actions().mouseMove({x: location.x + 3, y: location.y + 3}).perform();\n" +
+												"      });\n",
 		"dragAndDropElement": "    var target = element(by.{targetLocatorBy}({targetLocator}).find();\n" +
 			"    browser.actions().dragAndDrop(element(by.{locatorBy}({locator}).find(), {x: target.clientX, y: target.clientY}).perform();\n",
 		"clickAndHoldElement": "    // TODO: clickAndHoldElement: {locator}\n",
